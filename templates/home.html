@@ -7,10 +7,14 @@
   <body>
     {% extends "template.html" %}
     {% block content %}
-    
-    <h1> My First Try Using Flask </h1>
-    <p> Flask is Fun </p>
-    
+    <p>Upload your api .json file and image</p>
+    <form action="/uploader" method="post" enctype="multipart/form-data">
+      <input type="file" name="apikey">
+      <input type="file" name="image">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
     {% endblock %}
   </body>
 </html>
