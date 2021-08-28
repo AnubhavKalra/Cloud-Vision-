@@ -30,6 +30,14 @@ def uploader():
         g.save(os.path.join(app.config['UPLOAD_FOLDER'], (g.filename)))
         return final(f,g)
 
+# @app.route("/results")
+# def results(df1, df2, df3, df4):
+#     print(df1)
+#     print(df2)
+#     print(df3)
+#     print(df4)
+#     return render_template("results.html")
+
 @app.route("/final")
 def final(f,g):
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'./input/'+f.filename
@@ -88,32 +96,44 @@ def final(f,g):
                 text_detection = text.description
                 ), ignore_index=True
             )
-    output_file_1="output/result1.txt"
-    output_file_2="output/result2.txt"
-    output_file_3="output/result3.txt"
-    output_file_4="output/result4.txt"
-    df1 = df1.replace(np.nan, '', regex=True)
-    df2 = df2.replace(np.nan, '', regex=True)
-    df3 = df3.replace(np.nan, '', regex=True)
-    df4 = df4.replace(np.nan, '', regex=True)
-    print(df1)
-    with open(output_file_1, 'w', encoding="utf-8") as l1:
-        dfAsString = df1.to_string(header=False, index=False)
-        l1.write(dfAsString)
-    print(df2)
-    with open(output_file_2, 'w', encoding="utf-8") as l2:
-        dfAsString = df2.to_string(header=False, index=False)
-        l2.write(dfAsString)
-    print(df3)
-    with open(output_file_3, 'w', encoding="utf-8") as l3:
-        dfAsString = df3.to_string(header=False, index=False)
-        l3.write(dfAsString)
-    print(df4)
-    with open(output_file_4, 'w', encoding="utf-8") as l4:
-        dfAsString = df4.to_string(header=False, index=False)
-        l4.write(dfAsString)
+    df1 = df1.reset_index(drop=True)
+    df2 = df2.reset_index(drop=True)
+    df1.join(df2)
+    df1 = df1.reset_index(drop=True)
+    df3 = df3.reset_index(drop=True)
+    df1.join(df3)
+    df1 = df1.reset_index(drop=True)
+    df4 = df4.reset_index(drop=True)
+    df1.join(df4)
+    # output_file_1="output/result1.txt"
+    # output_file_2="output/result2.txt"
+    # output_file_3="output/result3.txt"
+    # output_file_4="output/result4.txt"
+    # df1 = df1.replace(np.nan, '', regex=True)
+    # df2 = df2.replace(np.nan, '', regex=True)
+    # df3 = df3.replace(np.nan, '', regex=True)
+    # df4 = df4.replace(np.nan, '', regex=True)
+    return(df1)
+    # with open(output_file_1, 'w', encoding="utf-8") as l1:
+    #     dfAsString = df1.to_string(header=False, index=False)
+    #     l1.write(dfAsString)
+    # print(df2)
+    # with open(output_file_2, 'w', encoding="utf-8") as l2:
+    #     dfAsString = df2.to_string(header=False, index=False)
+    #     l2.write(dfAsString)
+    # print(df3)
+    # with open(output_file_3, 'w', encoding="utf-8") as l3:
+    #     dfAsString = df3.to_string(header=False, index=False)
+    #     l3.write(dfAsString)
+    # print(df4)
+    # with open(output_file_4, 'w', encoding="utf-8") as l4:
+    #     dfAsString = df4.to_string(header=False, index=False)
+    #     l4.write(dfAsString)
 
-    return("Hopefully it's successfull")
+    
+
+
+
 
 
 if __name__ == "__main__":
