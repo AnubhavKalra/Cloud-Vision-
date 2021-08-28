@@ -1,0 +1,1 @@
+web: gunicorn app:coloud-vision-host
