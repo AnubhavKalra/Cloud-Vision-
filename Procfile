@@ -1,1 +1,1 @@
-web: gunicorn app: cloud-vision-host
+web: gunicorn app:app
