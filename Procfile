@@ -1,1 +1,1 @@
-web: gunicorn app:coloud-vision-host
+web: gunicorn main:app
